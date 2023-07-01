@@ -6,44 +6,18 @@ import java.net.UnknownHostException;
 import java.util.LinkedList;
 import javax.swing.JOptionPane;
 
-/**
- * Clase en la que se maneja la comunicación del lado del cliente.
- */
+
 public class Cliente extends Thread {
-    /**
-     * Socket utilizado para comunicarse con el servidor.
-     */
+    
     private Socket socket;
-    /**
-     * Stream utilizado para el envío de objetos al servidor.
-     */    
-    private ObjectOutputStream objectOutputStream;
-    /**
-     * Stream utilizado para el envío de objetos al servidor.
-     */    
-    private ObjectInputStream objectInputStream;
-    /**
-     * Ventana utilizada para la interfaz gráfica del cliente.
-     */        
+    private ObjectOutputStream objectOutputStream; 
+    private ObjectInputStream objectInputStream;    
     private final VentanaC ventana;    
-    /**
-     * Identificador único del cliente dentro del chat.
-     */
     private String identificador;
-    /**
-     * Variable que determina si el cliente escucha o no al servidor, una vez 
-     * que se arranca el hilo de comunicación del cliente.
-     */
     private boolean escuchando;
-    /**
-     * Variable que almacena la IP del host en el que se ejecuta el servidor.
-     */
     private final String host;
-    /**
-     * Varable que almacena el puerto por el cual el servidor escucha las conexiones
-     * de los diversos clientes.
-     */
     private final int puerto;
+    
     /**
      * Constructor de la clase cliente.
      * @param ventana

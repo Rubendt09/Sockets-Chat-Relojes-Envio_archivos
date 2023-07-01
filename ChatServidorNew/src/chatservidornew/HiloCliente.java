@@ -18,31 +18,14 @@ import java.util.LinkedList;
  * hilo tiene como función escuchar solamente a ese cliente.
  */
 public class HiloCliente extends Thread{
-    /**
-     * Socket que se utiliza para comunicarse con el cliente.
-     */
+    
     private final Socket socket;    
-    /**
-     * Stream con el que se envían objetos al servidor.
-     */    
     private ObjectOutputStream objectOutputStream;
-    /**
-     * Stream con el que se reciben objetos del servidor. 
-     */
-    private ObjectInputStream objectInputStream;            
-    /**
-     * Servidor al que pertenece este hilo.
-     */        
+    private ObjectInputStream objectInputStream; 
     private final Servidor server;
-    /**
-     * Identificador único del cliente con el que este hilo se comunica.
-     */
     private String identificador;
-    /**
-     * Variable booleana que almacena verdadero cuando este hilo esta escuchando
-     * lo que el cliente que atiende esta diciendo.
-     */
     private boolean escuchando;
+    
    /**
     * Método constructor de la clase hilo cliente.
     * @param socket

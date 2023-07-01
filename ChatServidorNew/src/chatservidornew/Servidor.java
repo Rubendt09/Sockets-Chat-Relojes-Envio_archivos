@@ -9,32 +9,14 @@ import javax.swing.JOptionPane;
 /**
  * Clase en la que se maneja la comunicación del lado del servidor.
  */
-public class Servidor extends Thread{    
-    /**
-     * Socket servidor que tiene como principal función escuchar cuando los clientes
-     * se conectan para incluirlos en el chat.
-     */
+public class Servidor extends Thread{  
+    
     private ServerSocket serverSocket;
-    /**
-     * Lista de todos los hilos de comunicación, para cada cliente se instancia uno 
-     * de estos hilos ya que cada hilo esta escuchando permanentemente lo que dicho 
-     * cliente envía al servidor. 
-     */
     LinkedList<HiloCliente> clientes;
-    /**
-     * Variable que almacena la ventana que gestiona la interfaz gráfica del servidor.
-     */
     private final VentanaS ventana;
-    /**
-     * Variable que almacena el puerto que el servidor usará para escuchar. 
-     */
     private final String puerto;
-    /**
-     * Correlativo para diferenciar a los múltiples clientes que se conectan, si se 
-     * conectaran, por ejemplo, dos usuarios con el mismo nombre, se podrían diferenciar
-     * por este correlativo.
-     */
     static int correlativo;
+    
     /**
      * Constructor del servidor.
      * @param puerto
