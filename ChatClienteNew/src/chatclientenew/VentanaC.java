@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+
 /**
  * Clase que maneja la interfaz gráfica del cliente.
  */
@@ -19,10 +20,10 @@ public class VentanaC extends javax.swing.JFrame {
     public VentanaC() {
         initComponents();
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        String ip_puerto_nombre[]=getIP_Puerto_Nombre();
-        String ip=ip_puerto_nombre[0];
-        String puerto=ip_puerto_nombre[1];
-        String nombre=ip_puerto_nombre[2];
+        String ip_puerto_nombre[] = getIP_Puerto_Nombre();
+        String ip = ip_puerto_nombre[0];
+        String puerto = ip_puerto_nombre[1];
+        String nombre = ip_puerto_nombre[2];
         cliente = new Cliente(this, ip, Integer.valueOf(puerto), nombre);
     }
 
@@ -47,6 +48,7 @@ public class VentanaC extends javax.swing.JFrame {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
             }
+
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
@@ -69,67 +71,71 @@ public class VentanaC extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtMensaje)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEnviar))
-                    .addComponent(jScrollPane1)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cmbContactos, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addComponent(txtMensaje)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(btnEnviar))
+                                        .addComponent(jScrollPane1)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addComponent(jLabel1)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(cmbContactos, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addContainerGap())
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmbContactos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEnviar))
-                .addContainerGap())
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(cmbContactos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel1))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(txtMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnEnviar))
+                                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
     /**
      * Al hacer clic en el botón de enviar, se debe pedir al cliente del chat que
      * envíe al servidor el mensaje.
-     * @param evt 
+     *
+     * @param evt
      */
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
         //Si no hay más clientes del chat con quien comunicarse.
-        if(cmbContactos.getSelectedItem()==null){
+        if (cmbContactos.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(this, "Debe escoger un destinatario válido, si no \n"
-                                                 + "hay uno, espere a que otro usuario se conecte\n"
-                                                 + "para poder chatear con él.");        
+                    + "hay uno, espere a que otro usuario se conecte\n"
+                    + "para poder chatear con él.");
             return;
         }
-        String cliente_receptor=cmbContactos.getSelectedItem().toString();
-        String mensaje=txtMensaje.getText();
+        String cliente_receptor = cmbContactos.getSelectedItem().toString();
+        String mensaje = txtMensaje.getText();
         cliente.enviarMensaje(cliente_receptor, mensaje);
         //se agrega en el historial de la conversación lo que el cliente ha dicho
-        txtHistorial.append("## Yo -> "+cliente_receptor+ " ## : \n" + mensaje+"\n");
+        txtHistorial.append("## Yo -> " + cliente_receptor + " ## : \n" + mensaje + "\n");
         txtMensaje.setText("");
     }//GEN-LAST:event_btnEnviarActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
     }//GEN-LAST:event_formWindowClosed
+
     /**
      * Cuando la ventana se este cerrando se notifica al servidor que el cliente
      * se ha desconectado, por lo que los demás clientes del chat no podrán enviarle
      * más mensajes.
-     * @param evt 
+     *
+     * @param evt
      */
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         cliente.confirmarDesconexion();
@@ -142,7 +148,7 @@ public class VentanaC extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -180,48 +186,56 @@ public class VentanaC extends javax.swing.JFrame {
     /**
      * Constante que almacena el puerto por defecto para la aplicación.
      */
-    private final String DEFAULT_PORT="10101";
+    private final String DEFAULT_PORT = "10101";
     /**
      * Constante que almacena la IP por defecto (localhost) para el servidor.
-     */    
-    private final String DEFAULT_IP="127.0.0.1";
+     */
+    private final String DEFAULT_IP = "127.0.0.1";
     /**
-     * Constante que almacena el cliente, con el cual se gestiona la comunicación 
+     * Constante que almacena el cliente, con el cual se gestiona la comunicación
      * con el servidor.
      */
     private final Cliente cliente;
+
     /**
      * Agrega un contacto al JComboBox de contactos.
-     * @param contacto 
+     *
+     * @param contacto
      */
     void addContacto(String contacto) {
         cmbContactos.addItem(contacto);
     }
+
     /**
      * Agrega un nuevo mensaje al historial de la conversación.
+     *
      * @param emisor
-     * @param mensaje 
+     * @param mensaje
      */
     void addMensaje(String emisor, String mensaje) {
-        txtHistorial.append("##### "+emisor + " ##### : \n" + mensaje+"\n");
+        txtHistorial.append("##### " + emisor + " ##### : \n" + mensaje + "\n");
     }
+
     /**
      * Se configura el título de la ventana para una nueva sesión.
-     * @param identificador 
+     *
+     * @param identificador
      */
     void sesionIniciada(String identificador) {
-        this.setTitle(" --- "+identificador+" --- ");
+        this.setTitle(" --- " + identificador + " --- ");
     }
+
     /**
-     * Método que abre una ventana para que el usuario ingrese la IP del host en 
-     * el que corre el servidor, el puerto con el que escucha y el nombre con el 
+     * Método que abre una ventana para que el usuario ingrese la IP del host en
+     * el que corre el servidor, el puerto con el que escucha y el nombre con el
      * que quiere participar en el chat.
-     * @return 
+     *
+     * @return
      */
     private String[] getIP_Puerto_Nombre() {
-        String s[]=new String[3];
-        s[0]=DEFAULT_IP;
-        s[1]=DEFAULT_PORT;
+        String s[] = new String[3];
+        s[0] = DEFAULT_IP;
+        s[1] = DEFAULT_PORT;
         JTextField ip = new JTextField(20);
         JTextField puerto = new JTextField(20);
         JTextField usuario = new JTextField(20);
@@ -235,26 +249,28 @@ public class VentanaC extends javax.swing.JFrame {
         myPanel.add(new JLabel("Puerto de la conexión:"));
         myPanel.add(puerto);
         myPanel.add(new JLabel("Escriba su nombre:"));
-        myPanel.add(usuario);        
-        int result = JOptionPane.showConfirmDialog(null, myPanel, 
-                 "Configuraciones de la comunicación", JOptionPane.OK_CANCEL_OPTION);
+        myPanel.add(usuario);
+        int result = JOptionPane.showConfirmDialog(null, myPanel,
+                "Configuraciones de la comunicación", JOptionPane.OK_CANCEL_OPTION);
         if (result == JOptionPane.OK_OPTION) {
-                s[0]=ip.getText();
-                s[1]=puerto.getText();
-                s[2]=usuario.getText();
-        }else{
+            s[0] = ip.getText();
+            s[1] = puerto.getText();
+            s[2] = usuario.getText();
+        } else {
             System.exit(0);
         }
         return s;
-    }    
+    }
+
     /**
      * Método que elimina cierto cliente de la lista de contactos, este se llama
      * cuando cierto usuario cierra sesión.
-     * @param identificador 
+     *
+     * @param identificador
      */
     void eliminarContacto(String identificador) {
         for (int i = 0; i < cmbContactos.getItemCount(); i++) {
-            if(cmbContactos.getItemAt(i).toString().equals(identificador)){
+            if (cmbContactos.getItemAt(i).toString().equals(identificador)) {
                 cmbContactos.removeItemAt(i);
                 return;
             }
