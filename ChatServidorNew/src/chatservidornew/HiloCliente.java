@@ -1,8 +1,3 @@
-/*
- * Ejemplo desarrollado por Erick Navarro
- * Blog: e-navarro.blogspot.com
- * Noviembre - 2015
- */
 
 package chatservidornew;
 
