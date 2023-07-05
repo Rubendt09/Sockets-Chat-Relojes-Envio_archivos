@@ -6,6 +6,7 @@ import java.net.UnknownHostException;
 import java.util.LinkedList;
 import javax.swing.JOptionPane;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
@@ -91,10 +92,10 @@ public class Cliente extends Thread {
      */
     public void enviarMensaje(String cliente_receptor, String mensaje) {
         // Obtener la hora actual en la zona horaria local del cliente
-        Date horaActual = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-        sdf.setTimeZone(clienteTimeZone);
-        String horaLocal = sdf.format(horaActual);
+        //Date horaActual = new Date();
+        //SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+        //sdf.setTimeZone(clienteTimeZone);
+        //String horaLocal = sdf.format(horaActual);
 
         LinkedList<String> lista = new LinkedList<>();
         //tipo
@@ -106,7 +107,7 @@ public class Cliente extends Thread {
         //mensaje que se desea transmitir
         lista.add(mensaje);
         // Agregar la hora local a la lista de mensajes
-        lista.add(horaLocal);
+        //lista.add(horaLocal);
         try {
             objectOutputStream.writeObject(lista);
         } catch (IOException ex) {
@@ -170,7 +171,16 @@ public class Cliente extends Thread {
                 // 1      - Cliente emisor
                 // 2      - Cliente receptor
                 // 3      - Mensaje
-                ventana.addMensaje(lista.get(1), lista.get(3) + " - " + lista.get(4));
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTimeZone(clienteTimeZone);
+                Date horaActual = calendar.getTime();
+
+
+                // Formatea la hora agregada en el formato deseado
+                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+                sdf.setTimeZone(clienteTimeZone);
+                String horaLocal = sdf.format(horaActual);
+                ventana.addMensaje(lista.get(1), lista.get(3) + " - " + horaLocal);
                 break;
             default:
                 break;
