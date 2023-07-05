@@ -3,12 +3,12 @@ package chatclientenew;
 import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.Calendar;
 import java.util.LinkedList;
 import javax.swing.JOptionPane;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
-
 
 public class Cliente extends Thread {
 
@@ -21,7 +21,6 @@ public class Cliente extends Thread {
     private final String host;
     private final int puerto;
     private TimeZone clienteTimeZone;
-
 
     /**
      * Constructor de la clase cliente.
@@ -90,12 +89,6 @@ public class Cliente extends Thread {
      * @param mensaje
      */
     public void enviarMensaje(String cliente_receptor, String mensaje) {
-        // Obtener la hora actual en la zona horaria local del cliente
-        Date horaActual = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-        sdf.setTimeZone(clienteTimeZone);
-        String horaLocal = sdf.format(horaActual);
-
         LinkedList<String> lista = new LinkedList<>();
         //tipo
         lista.add("MENSAJE");
@@ -105,8 +98,6 @@ public class Cliente extends Thread {
         lista.add(cliente_receptor);
         //mensaje que se desea transmitir
         lista.add(mensaje);
-        // Agregar la hora local a la lista de mensajes
-        lista.add(horaLocal);
         try {
             objectOutputStream.writeObject(lista);
         } catch (IOException ex) {
@@ -141,7 +132,8 @@ public class Cliente extends Thread {
     }
 
     /**
-     * Método que ejecuta una serie de instruccines dependiendo del mensaje que el cliente reciba del servidor.
+     * Método que ejecuta una serie de instruccines dependiendo del mensaje que
+     * el cliente reciba del servidor.
      *
      * @param lista
      */
@@ -170,7 +162,19 @@ public class Cliente extends Thread {
                 // 1      - Cliente emisor
                 // 2      - Cliente receptor
                 // 3      - Mensaje
-                ventana.addMensaje(lista.get(1), lista.get(3) + " - " + lista.get(4));
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTimeZone(clienteTimeZone);
+                Date horaActual = calendar.getTime();
+
+                // Agrega dos horas a la hora actual
+                calendar.add(Calendar.HOUR_OF_DAY, 2);
+                Date horaAgregada = calendar.getTime();
+
+                // Formatea la hora agregada en el formato deseado
+                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+                sdf.setTimeZone(clienteTimeZone);
+                String horaLocal = sdf.format(horaAgregada);
+                ventana.addMensaje(lista.get(1), lista.get(3) + " - " + horaLocal);
                 break;
             default:
                 break;
@@ -197,9 +201,9 @@ public class Cliente extends Thread {
     }
 
     /**
-     * Cuando se cierra una ventana cliente, se debe notificar al servidor que el
-     * cliente se ha desconectado para que lo elimine de la lista de clientes y
-     * todos los clientes lo eliminen de su lista de contactos.
+     * Cuando se cierra una ventana cliente, se debe notificar al servidor que
+     * el cliente se ha desconectado para que lo elimine de la lista de clientes
+     * y todos los clientes lo eliminen de su lista de contactos.
      */
     void confirmarDesconexion() {
         LinkedList<String> lista = new LinkedList<>();
@@ -215,7 +219,8 @@ public class Cliente extends Thread {
     }
 
     /**
-     * Método que retorna el identificador del cliente que es único dentro del chat.
+     * Método que retorna el identificador del cliente que es único dentro del
+     * chat.
      *
      * @return
      */
